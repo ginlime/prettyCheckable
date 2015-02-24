@@ -126,7 +126,8 @@
             var classType = el.data('type') !== undefined ? el.data('type') : el.attr('type');
 
             var label = null,
-                elLabelId = el.attr('id');
+                elLabelId = el.attr('id'),
+                parentIsLabel = false;
 
             if (elLabelId !== undefined) {
 
@@ -137,6 +138,12 @@
                     label = elLabel.text();
 
                     elLabel.remove();
+
+                }  else if(el.closest('label').length > 0) {
+
+                    label = el.closest('label').text();
+
+                    parentIsLabel = true;
 
                 }
 
@@ -178,6 +185,11 @@
             }
 
             el.parent().append(dom.join('\n'));
+
+            if(parentIsLabel){
+                el.parent().parent().replaceWith(el.parent());
+            }
+
             addCheckableEvents(el.parent());
 
         },
