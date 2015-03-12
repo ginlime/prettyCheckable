@@ -64,7 +64,9 @@
 
             if (input.prop('type') === 'radio') {
 
-                $('input[name="' + input.attr('name') + '"]').each(function(index, el){
+                var _thisEffective = $(input).parents('form').length > 0 ? $(input).parents('form') : $('body');
+
+                $('input[name="' + input.attr('name') + '"]', _thisEffective).each(function(index, el){
 
                     $(el).prop('checked', false).parent().find('a:first').removeClass('checked');
 
@@ -186,7 +188,9 @@
 
             if ($(this.element).prop('type') === 'radio') {
 
-                $('input[name="' + $(this.element).attr('name') + '"]').each(function(index, el){
+                var _thisEffective = $(this.element).parents('form').length > 0 ? $(this.element).parents('form') : $('body');
+
+                $('input[name="' + $(this.element).attr('name') + '"]', _thisEffective).each(function(index, el){
 
                     $(el).prop('checked', false).attr('checked', false).parent().find('a:first').removeClass('checked');
 
